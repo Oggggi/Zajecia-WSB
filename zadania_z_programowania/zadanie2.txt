@@ -1,0 +1,374 @@
+//zadanie 3.1
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+	float suma, liczba;
+        int licznik;
+        Console.WriteLine("Podaj liczby do sumowania");
+        suma = 0;
+        licznik = 0;
+        while (suma <= 100)
+        {
+            liczba = float.Parse(Console.ReadLine());
+            suma += liczba;
+            licznik++;
+        }
+        Console.WriteLine("Suma wynosi: " + suma);
+        Console.WriteLine("Liczba dodanych liczb: " + licznik);
+    }
+}
+
+
+//zadanie 3.2
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int suma, ilosc, n;
+        suma = 0;
+        n = 1;
+        Console.WriteLine("Podaj ilosc liczb do zsumowania: ");
+        ilosc = Int32.Parse(Console.ReadLine());
+        while (ilosc > n)
+        {
+            suma += n;
+            n++;
+        }
+        Console.WriteLine("Suma liczb od 1 do " + ilosc + " wynosi: " + suma);
+    }
+}
+
+
+//zadanie 3.3
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int suma, licznik, liczba;
+        Console.WriteLine("Podaj sume: ");
+        suma = int.Parse(Console.ReadLine());
+        licznik = 0;
+        liczba = 0;
+        while (liczba <= suma)
+        {
+            liczba += licznik;
+            licznik++;
+        }
+        Console.WriteLine("Aby osiagnac sume " + suma + " nalezy dodac " + licznik + " liczb");
+    }
+}
+
+
+//zadanie 3.4
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int suma, licznik;
+        double wynik;
+        suma = 100;
+        licznik = 0;
+        wynik = 0.0;
+        for (int i = 1; i <= suma; i++)
+        {
+            wynik += (Math.Pow(-1, licznik) / (2 * licznik + 1));
+            licznik++;
+        }
+        Console.WriteLine("Wynik: " + wynik);
+    }
+}
+
+
+//zadanie 3.5
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        double kapital = 10000;
+        for (int i = 1; i <= 12; i++)
+        {
+            kapital = kapital + (kapital * (0.05 / 12));
+        }
+        System.Console.WriteLine("Kapital po 12 miesiacach: " + kapital);
+    }
+}
+
+
+//zadanie 3.6
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int liczbaA, liczbaB, suma;
+
+        Console.WriteLine("Podaj pierwsza liczbe calkowita: ");
+        liczbaA = Int32.Parse(Console.ReadLine());
+	if (liczbaA <= 0)
+        {
+            Console.WriteLine("Podana liczba musi być dodatnia.");
+            return;
+        }
+
+        Console.WriteLine("Podaj druga liczbe calkowita: ");
+        liczbaB = Int32.Parse(Console.ReadLine());
+	if (liczbaB <= 0)
+        {
+            Console.WriteLine("Podana liczba musi być dodatnia.");
+            return;
+        }
+
+        suma = liczbaA;
+
+        while (liczbaB != 1)
+        {
+            suma = suma * liczbaA;
+            liczbaB--;
+        }
+        Console.WriteLine("Wynik potegowania: " + suma);
+    }
+}
+
+
+//zadanie 3.7
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        float liczba;
+        Console.WriteLine("Podaj liczbe spelniajaca warunek 2 < |x| < 3: ");
+        liczba = float.Parse(Console.ReadLine());
+        do
+        {
+            liczba = float.Parse(Console.ReadLine());
+        }
+        while (liczba > 2 && liczba < 3);
+        Console.WriteLine("Podana liczba nie jest w przedziale miedzy 2 a 3");
+    }
+}
+
+
+//zadanie 3.8
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int liczba, licznik;
+        licznik = 1;
+        Console.WriteLine("Podaj liczbe calkowita dodatnia: ");
+        liczba = int.Parse(Console.ReadLine());
+
+        if (liczba <= 0)
+        {
+            Console.WriteLine("Podana liczba musi być dodatnia.");
+            return;
+        }
+        Console.WriteLine("Dzielniki liczby: ");
+        do
+        {
+            if (liczba % licznik == 0)
+            {
+                Console.WriteLine(licznik);
+            }
+            licznik++;
+        } 
+	while (licznik <= liczba);
+    }
+}
+
+
+//zadanie 3.9
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        for(int x = 0; x <= 2; x++)
+        {
+            for (int y = 0; y <= 5; y++)
+            {
+                for (int z = 0; z <= 10; z++)
+                {
+                    if (z + 2 * y + 5 * x == 10)
+                    {
+                        Console.WriteLine(z + " zlotowek " + y + " dwuzlotowek " + x + " pieciozlotowek");
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//zadanie 3.10
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Console.Write("  * ");
+            for (int i = 0; i < 16; i++)
+            {
+                Console.Write(" ");
+            }
+            Console.WriteLine("*");
+
+            Console.Write("    *");
+            for (int i = 0; i < 13; i++)
+            {
+                Console.Write(" ");
+            }
+            Console.WriteLine("*");
+            Console.Write("      *");
+            for (int i = 0; i < 9; i++)
+            {
+                Console.Write(" ");
+            }
+            Console.WriteLine("*");
+            for (int n = 0; n < 4; n++)
+            {
+                for (int i = 0; i < 7; i++)
+                {
+                    Console.Write(" ");
+                }
+                for(int i = 0; i < 4; i++)
+                {
+                    Console.Write(" *");
+                }
+
+                Console.WriteLine();
+            }
+            Console.Write("      *");
+            for (int i = 0; i <9; i++)
+            {
+                Console.Write(" ");
+            }
+            Console.WriteLine("*");
+            Console.Write("    *");
+            for (int i = 0; i < 13; i++)
+            {
+                Console.Write(" ");
+            }
+            Console.WriteLine("*");
+           Console.Write("  * ");
+            for (int i = 0; i < 16; i++)
+            {
+                Console.Write(" ");
+            }
+            Console.WriteLine("*");
+    }
+}
+
+
+//zadanie 3.11
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Console.WriteLine("Podaj liczbe nieparzyta z przedzialu 9 do 15");
+        int x = Convert.ToInt32(Console.ReadLine());
+        if (x < 9 || x > 15 || x % 2 == 0)
+        {
+            Console.WriteLine("Liczba nie spelnia warunkow");
+            return;
+        }
+        for (int j = 0; j < x; j++)
+        {
+            Console.Write(" * ");
+        }
+        for (int i = 0; i < 2; i++)
+        {
+            Console.WriteLine();
+            for (int l=0; l < x / 4; l++)
+            {
+                for (int s = 0; s < 2; s++)
+                {
+                    Console.Write(" * ");
+                    for (int k = 0; k < x / 2-1; k++)
+                    {
+                        Console.Write("   ");
+
+                    }
+                    Console.Write(" * ");
+                    for (int k = 0; k < x / 2-1; k++)
+                    {
+                        Console.Write("   ");
+
+                    }
+                    Console.Write(" * ");
+                    Console.WriteLine();
+                }
+            }
+            for (int j = 0; j < x; j++)
+            {
+                Console.Write(" * ");
+            }
+        }
+    }
+}
+
+
+//zadanie 3.12
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Console.WriteLine("Liczby pierwsze blizniacze mniejsze od 100 to: ");
+        for (int i = 3; i < 100; i++)
+        {
+            bool pierwsza = true;
+            int x = 2;
+            while (x < i)
+            {
+                if (i%x==0)
+                {
+                    pierwsza = false;
+                    break;
+                }
+                x++;
+            }
+            if (!pierwsza)
+                continue;
+            x = 2;
+            bool drugaPierwsza = true;
+            while (x < (i + 2))
+            {
+                if ((i + 2) % x == 0)
+                {
+                    drugaPierwsza= false;
+                    break;
+                }
+                x++;
+            }
+            if(drugaPierwsza&&pierwsza)
+            Console.WriteLine(i + " i " + (i + 2));
+        }
+    }
+}
+
+
+//zadanie 3.13
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int dzielnik, wynik;
+        Console.WriteLine("Liczby doskonale mniejsze od 10 000 to: ");
+        for (int liczba = 2; liczba < 10000; liczba++)
+            {
+                dzielnik = 1;
+                wynik = 0;
+                do
+                {
+                    if (liczba % dzielnik == 0)
+                    {
+                        wynik = wynik + dzielnik;
+                    }
+                    dzielnik++;
+                }
+                while (liczba > dzielnik);
+                if (wynik == liczba)
+                {
+                    Console.WriteLine(liczba);
+                }
+            }
+    }
+}
