@@ -1,0 +1,352 @@
+//zadanie 3.1
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int liczbaElementow;
+        int[] tablica;
+        Console.WriteLine("Podaj liczbe elementow do wprowadzenia: ");
+        liczbaElementow = int.Parse(Console.ReadLine());
+        while (liczbaElementow <= 0)
+        {
+            Console.WriteLine("Liczba elementow musi byc wieksza od zera. Podaj ponownie: ");
+            liczbaElementow = int.Parse(Console.ReadLine());
+        }
+        tablica = new int[liczbaElementow];
+        for (int i = 0; i < liczbaElementow; i++)
+        {
+            Console.WriteLine($"Podaj element {i + 1}: ");
+            tablica[i] = int.Parse(Console.ReadLine());
+        }
+        Console.Write("Elementy wprowadzonej tablicy: ");
+        for (int i = 0; i < liczbaElementow; i++)
+        {
+            Console.Write(tablica[i] + " ");
+        }
+    }
+}
+
+
+//zadanie 3.2
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int[] tablica = new int[20];
+        double sumaElementow = 0;
+        for (int i = 0; i < tablica.Length; i++)
+        {
+            tablica[i] = i + 1;
+            sumaElementow += tablica[i];
+        }
+        Console.WriteLine("Srednia wartosc elementow tablicy: " + (sumaElementow / tablica.Length));
+    }
+}
+
+
+//zadanie 3.3
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Random random = new Random();
+        byte[] tablica = new byte[10];
+        random.NextBytes(tablica);
+        int lp = 1;
+        int minimum = tablica[0];
+        for (int i = 1; i < tablica.Length; i++)
+        {
+            if (tablica[i] < minimum)
+            {
+                minimum = tablica[i];
+                lp = i;
+            }
+        }
+        for (int i = 0; i < tablica.Length; i++)
+        {
+            Console.WriteLine("Tablica: " + "[" + i + "] " + tablica[i]);
+        }
+        Console.WriteLine("Najmniejsza wartosc w tablicy to: " + minimum + " o indeksie: " + lp);
+    }
+}
+
+
+//zadanie 3.4
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int[,] tablica = new int[5, 5];
+        Random random = new Random();
+        int suma = 0;
+        for (int i = 0; i < tablica.GetLength(0); i++)
+        {
+            for (int j = 0; j < tablica.GetLength(1); j++)
+            {
+                tablica[i, j] = random.Next(0, 9);
+            }
+        }
+        for (int i = 0; i < tablica.GetLength(0); i++)
+        {
+            for (int j = 0; j < tablica.GetLength(1); j++)
+            {
+                Console.Write(tablica[i, j] + " ");
+            }
+            Console.WriteLine();
+        }
+        for (int i = 0; i < tablica.GetLength(0); i++)
+        {
+            suma += tablica[i, i];
+            suma += tablica[i, tablica.GetLength(1) - 1 - i];
+        }
+        Console.WriteLine("Suma przekatnych: " + suma);
+    }
+}
+
+
+//zadanie 3.5
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int[,] tablica = new int[3, 5];
+        int[,] transpozycja = new int[5, 3];
+        Random random = new Random();
+        for (int i = 0; i < tablica.GetLength(0); i++)
+        {
+            for (int j = 0; j < tablica.GetLength(1); j++)
+            {
+                tablica[i, j] = random.Next(0, 99);
+            }
+        }
+        for (int i = 0; i < tablica.GetLength(0); i++)
+        {
+            for (int j = 0; j < tablica.GetLength(1); j++)
+            {
+                Console.Write(tablica[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine("Transpozycja:");
+        for (int i = 0; i < tablica.GetLength(0); i++)
+        {
+            for (int j = 0; j < tablica.GetLength(1); j++)
+            {
+                transpozycja[j, i] = tablica[i, j];
+            }
+        }
+        for (int i = 0; i < transpozycja.GetLength(0); i++)
+        {
+            for (int j = 0; j < transpozycja.GetLength(1); j++)
+            {
+                Console.Write(transpozycja[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+}
+
+
+//zadanie 3.6
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        char[] tablica = new char[8];
+        int binarna;
+        int dziesietna;
+        Console.WriteLine("Podaj liczbe w systemie binarnym (maksymalnie 8 znakow): ");
+        tablica = Console.ReadLine().ToCharArray();
+        while (tablica.Length > 8)
+        {
+            Console.WriteLine("Liczba jest za duza. Podaj liczbe w systemie binarnym (maksymalnie 8 znakow): ");
+            tablica = Console.ReadLine().ToCharArray();
+        }
+        foreach (char znak in tablica)
+        {
+            if (znak != '0' && znak != '1')
+            {
+                Console.WriteLine("Podano niepoprawny znak");
+                return;
+            }
+        }
+        Array.Reverse(tablica);
+        dziesietna = 0;
+        for (int i = 0; i < tablica.Length; i++)
+        {
+            binarna = (int)Char.GetNumericValue(tablica[i]);
+            dziesietna += binarna * (int)Math.Pow(2, i);
+        }
+        Console.WriteLine("Liczba w systemie dziesietnym: " + dziesietna);
+    }
+}
+
+
+//zadanie 3.7
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        string tekstUrzytkownika;
+        string tekstZredagowany = "";
+        Console.WriteLine("Podaj tekst do zredagowania: ");
+        tekstUrzytkownika = Console.ReadLine();
+        while (tekstUrzytkownika == "")
+        {
+            Console.WriteLine("Podaj tekst do zredagowania: ");
+            tekstUrzytkownika = Console.ReadLine();
+        }
+        for (int i = 0; i < tekstUrzytkownika.Length; i++)
+        {
+            if (!(tekstUrzytkownika[i] == ' ' && tekstUrzytkownika[i + 1] == ' '))
+            {
+                tekstZredagowany += tekstUrzytkownika[i];
+            }
+        }
+        Console.WriteLine("Zredagowany tekst: ");
+        Console.WriteLine(tekstZredagowany);
+    }
+}
+
+
+//zadanie 3.8
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        string tekstUrzytkownika;
+        string tekstZredagowany = "";
+        int iloscSlow = 0;
+        Console.WriteLine("Podaj tekst: ");
+        tekstUrzytkownika = Console.ReadLine();
+        tekstUrzytkownika = tekstUrzytkownika.Trim();
+        for (int i = 0; i < tekstUrzytkownika.Length; i++)
+        {
+            if (!(tekstUrzytkownika[i] == ' ' && tekstUrzytkownika[i + 1] == ' ' || tekstUrzytkownika[i] == ',' || tekstUrzytkownika[i] == '.' || tekstUrzytkownika[i] == '!' || tekstUrzytkownika[i] == '?'))
+            {
+                tekstZredagowany += tekstUrzytkownika[i];
+            }
+        }
+        if (tekstZredagowany.Length > 0)
+        {
+            iloscSlow = tekstZredagowany.Split(' ').Length;
+            Console.WriteLine("Ilość słów w tekście: " + iloscSlow);
+        }
+        else
+        {
+            Console.WriteLine("Nie podano żadnego tekstu.");
+        }
+    }
+}
+
+
+//zadanie 3.9
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        string imieNazwisko = "", drugieImie = "", inicjaly = "";
+        string[] czesci;
+        int indeks = 0;
+
+        Console.WriteLine("Podaj imię i nazwisko: ");
+        imieNazwisko = Console.ReadLine();
+
+        Console.WriteLine("Podaj drugie imię: ");
+        drugieImie = Console.ReadLine();
+
+        czesci = imieNazwisko.Split(' ');
+        imieNazwisko = czesci[0] + " d" + drugieImie + " " + czesci[1];
+        indeks = imieNazwisko.IndexOf(" d");
+        Console.WriteLine("Drugie imie i nazwisko: {0}", imieNazwisko.Substring(indeks + 2));
+        inicjaly = czesci[0][0].ToString() + drugieImie[0].ToString() + czesci[1][0].ToString();
+        Console.WriteLine("Inicjały: {0}", inicjaly);
+    }
+}
+
+
+//zadanie 3.10
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        string symbolMaterialu;
+        string[] czesci;
+        string[] data;
+        Console.WriteLine("Wpisz nazwe w formacie nazwa-rok-miesiac-dzien-przedmiot: ");
+        symbolMaterialu = Console.ReadLine();
+        czesci = symbolMaterialu.Split('-');
+        data = new string[3];
+        data[0] = czesci[3];
+        data[1] = czesci[2];
+        data[2] = czesci[1];
+        Console.WriteLine($"Data to: {string.Join("-", data)}");
+    }
+}
+
+
+//zadanie 3.11
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        string tekstPierwszy, tekstDrugi, tekstTrzeci = "";
+
+        Console.WriteLine("Podaj pierwszy tekst (zapamietaj dlugosc tekstu): ");
+        tekstPierwszy = Console.ReadLine();
+        Console.WriteLine("Podaj drugi tekst (dlugosc tekstu taka sama jak pierwszego): ");
+        tekstDrugi = Console.ReadLine();
+
+        while (tekstDrugi.Length != tekstPierwszy.Length)
+        {
+            Console.WriteLine("Dlugosc drugiego tekstu jest inna niz pierwszego. Podaj ponownie: ");
+            tekstDrugi = Console.ReadLine();
+        }
+        for (int i = 0; i < tekstPierwszy.Length; i++)
+        {
+            if (tekstPierwszy[i] == tekstDrugi[i])
+            {
+                tekstTrzeci += tekstPierwszy[i];
+            }
+            else
+            {
+                tekstTrzeci += "?";
+            }
+        }
+        if (tekstTrzeci == tekstPierwszy)
+        {
+            Console.WriteLine("Teksty sa identyczne.");
+        }
+        else
+        {
+            Console.WriteLine("Roznica: " + tekstTrzeci);   
+        }
+    }
+}
+
+
+//zadanie 3.12
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        string tekst, tekstZredagowany = "";
+        Console.WriteLine("Podaj tekst:");
+        tekst = Console.ReadLine();
+        tekst = tekst.Trim();
+        for (int i = 0; i < tekst.Length; i++)
+        {
+            if (!(tekst[i] == ' ' && tekst[i + 1] == ' '))
+            {
+                tekstZredagowany += tekst[i];
+            }
+        }
+        for (int i = 0; i < tekstZredagowany.Length; i++)
+        {
+            if (tekstZredagowany[i] != ' ')
+            {
+                Console.Write(tekstZredagowany[i] + " ");
+            }
+        }
+    }
+}
