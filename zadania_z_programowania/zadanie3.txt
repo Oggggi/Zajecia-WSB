@@ -187,20 +187,21 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        string tekstUrzytkownika;
+        string tekstUzytkownika;
         string tekstZredagowany = "";
         Console.WriteLine("Podaj tekst do zredagowania: ");
-        tekstUrzytkownika = Console.ReadLine();
-        while (tekstUrzytkownika == "")
+        tekstUzytkownika = Console.ReadLine();
+        while (tekstUzytkownika == "")
         {
             Console.WriteLine("Podaj tekst do zredagowania: ");
-            tekstUrzytkownika = Console.ReadLine();
+            tekstUzytkownika = Console.ReadLine();
         }
-        for (int i = 0; i < tekstUrzytkownika.Length; i++)
+        tekstUzytkownika = tekstUzytkownika.Trim();
+        for (int i = 0; i < tekstUzytkownika.Length; i++)
         {
-            if (!(tekstUrzytkownika[i] == ' ' && tekstUrzytkownika[i + 1] == ' '))
+            if (!(tekstUzytkownika[i] == ' ' && tekstUzytkownika[i + 1] == ' '))
             {
-                tekstZredagowany += tekstUrzytkownika[i];
+                tekstZredagowany += tekstUzytkownika[i];
             }
         }
         Console.WriteLine("Zredagowany tekst: ");
@@ -214,17 +215,17 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        string tekstUrzytkownika;
+        string tekstUzytkownika;
         string tekstZredagowany = "";
         int iloscSlow = 0;
         Console.WriteLine("Podaj tekst: ");
-        tekstUrzytkownika = Console.ReadLine();
-        tekstUrzytkownika = tekstUrzytkownika.Trim();
-        for (int i = 0; i < tekstUrzytkownika.Length; i++)
+        tekstUzytkownika = Console.ReadLine();
+        tekstUzytkownika = tekstUzytkownika.Trim();
+        for (int i = 0; i < tekstUzytkownika.Length; i++)
         {
-            if (!(tekstUrzytkownika[i] == ' ' && tekstUrzytkownika[i + 1] == ' ' || tekstUrzytkownika[i] == ',' || tekstUrzytkownika[i] == '.' || tekstUrzytkownika[i] == '!' || tekstUrzytkownika[i] == '?'))
+            if (!(tekstUzytkownika[i] == ' ' && tekstUzytkownika[i + 1] == ' ' || tekstUzytkownika[i] == ',' || tekstUzytkownika[i] == '.' || tekstUzytkownika[i] == '!' || tekstUzytkownika[i] == '?'))
             {
-                tekstZredagowany += tekstUrzytkownika[i];
+                tekstZredagowany += tekstUzytkownika[i];
             }
         }
         if (tekstZredagowany.Length > 0)
@@ -349,4 +350,5 @@ internal class Program
             }
         }
     }
+
 }
