@@ -1,0 +1,213 @@
+//zadanie 4.1.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int mieszkancy = 1000000;
+        double powierzchniaA, powierzchniaB;
+        double gestoscA, gestoscB;
+
+        Console.WriteLine("Podaj powierzchnie pierwszego miasta w km^2: ");
+        powierzchniaA = Convert.ToDouble(Console.ReadLine());
+        Console.WriteLine("Podaj powierzchnie drugiego miasta w km^2: ");
+        powierzchniaB = Convert.ToDouble(Console.ReadLine());
+
+        GestoscZaludnienia gZ = new GestoscZaludnienia();
+        gestoscA = gZ.ObliczGestosc(mieszkancy, powierzchniaA);
+        gestoscB = gZ.ObliczGestosc(mieszkancy, powierzchniaB);
+
+        Console.WriteLine("Gestosc zaludnienia pierwszego miasta wynosi: " + gestoscA + " osób/km^2");
+        Console.WriteLine("Gestosc zaludnienia drugiego miasta wynosi: " + gestoscB + " osób/km^2");
+    }
+}
+class GestoscZaludnienia
+{
+    public double ObliczGestosc(int iloscMieszkancow, double powierzchnia)
+    {
+        if (powierzchnia == 0)
+        {
+            throw new ArgumentException("Powierzchnia nie może byc zerowa.");
+        }
+        return iloscMieszkancow / powierzchnia;
+    }
+}
+
+
+//zadanie 4.2.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int suma = 0;
+        for (int i = 1; i <= 20; i++)
+        {
+            suma = Dodaj(suma, i);
+        }
+        Console.WriteLine("Suma liczb od 1 do 20 wynosi: " + suma);
+    }
+    static int Dodaj(int a, int b)
+    {
+        return a + b;
+    }
+}
+
+
+//zadanie 4.3.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Console.WriteLine("Potega: ");
+        for (int i = 0; i < 20; i++)
+        {
+            Console.WriteLine($"2^{i} = {Potega(2, i)}");
+        }
+
+        Console.WriteLine("\nSilnia: ");
+        for (int i = 0; i < 20; i++)
+        {
+            Console.WriteLine($"{i}! = {Silnia(i)}");
+        }
+    }
+    public static long Potega(int podstawa, int wykladnik)
+    {
+        if (wykladnik == 0)
+            return 1;
+        return podstawa * Potega(podstawa, wykladnik - 1);
+    }
+    public static long Silnia(int n)
+    {
+        if (n == 0 || n == 1)
+            return 1;
+        return n * Silnia(n - 1);
+    }
+}
+
+
+//zadanie 4.4.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        for (int i = 0; i <= 48; i += 3)
+        {
+            long licznikWywolan = 0;
+            var start = DateTime.Now;
+            long wynik = Fibonacci(i, ref licznikWywolan);
+            var czas = DateTime.Now - start;
+            Console.WriteLine($"F({i}) = {wynik}, Wywołania: {licznikWywolan}, Czas: {czas:mm\\-ss}");
+        }
+    }
+    private static long Fibonacci(int n, ref long licznikWywolan)
+    {
+        licznikWywolan++;
+        if (n <= 1)
+            return n;
+        return Fibonacci(n - 1, ref licznikWywolan) + Fibonacci(n - 2, ref licznikWywolan);
+    }
+}
+
+
+//zadanie 4.5.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        double promien = 5.0;
+        double dlugoscProstokata = 4.0;
+        double szerokoscProstokata = 6.0;
+
+        double poleKola = PoliczPole(promien);
+        double poleProstokatu = PoliczPole(dlugoscProstokata, szerokoscProstokata);
+
+        Console.WriteLine($"Pole kola o promieniu {promien} wynosi: {poleKola}");
+        Console.WriteLine($"Pole prostokata o bokach {dlugoscProstokata} i {szerokoscProstokata} wynosi: {poleProstokatu}");
+
+        double a = 10.0;
+        double b = 3.0;
+        int c = 10;
+        int d = 3;
+
+        double dzielenieZmienno = Podziel(a, b);
+        int dzielenieStalo = Podziel(c, d);
+
+        Console.WriteLine($"Wynik dzielenia zmiennoprzecinkowego {a} / {b} wynosi: {dzielenieZmienno}");
+        Console.WriteLine($"Wynik dzielenia staloprzecinkowego {c} / {d} wynosi: {dzielenieStalo}");
+    }
+    static double PoliczPole(double r)
+    {
+        return Math.PI * r * r;
+    }
+    static double PoliczPole(double dlugosc, double szerokosc)
+    {
+        return dlugosc * szerokosc;
+    }
+    static double Podziel(double a, double b)
+    {
+        return a / b;
+    }
+    static int Podziel(int a, int b)
+    {
+        return a / b;
+    }
+}
+
+//zadanie 4.6.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int[] numbers = { 5, 2, 9, 1, 5, 6 };
+        Sortowanie(numbers);
+        Console.WriteLine("Posortowana tablica: " + string.Join(", ", numbers));
+    }
+    static void Zamien(ref int a, ref int b)
+    {
+        int temp = a;
+        a = b;
+        b = temp;
+    }
+    static void Sortowanie(int[] array)
+    {
+        int n = array.Length;
+        for (int i = 0; i < n - 1; i++)
+        {
+            for (int j = 0; j < n - i - 1; j++)
+            {
+                if (array[j] > array[j + 1])
+                {
+                    Zamien(ref array[j], ref array[j + 1]);
+                }
+            }
+        }
+    }
+}
+
+
+//zadanie 4.7.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int[] numbers = { 34, 12, 5, 67, 23, 1, 89, 45, 3, 78 };
+        int najmnijeszyElement = ZnajdzNajmniejszyElement(numbers);
+        Console.WriteLine("Najmniejszym elementem tablicy jest: " + najmnijeszyElement);
+    }
+    private static int ZnajdzNajmniejszyElement(int[] array)
+    {
+        if (array == null || array.Length == 0)
+        {
+            throw new ArgumentException("Tablica nie moze byc pusta!");
+        }
+
+        int najmniejszy = array[0];
+        foreach (int liczba in array)
+        {
+            if (liczba < najmniejszy)
+            {
+                najmniejszy = liczba;
+            }
+        }
+        return najmniejszy;
+    }
+}
