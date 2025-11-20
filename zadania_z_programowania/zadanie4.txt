@@ -12,16 +12,13 @@ internal class Program
         Console.WriteLine("Podaj powierzchnie drugiego miasta w km^2: ");
         powierzchniaB = Convert.ToDouble(Console.ReadLine());
 
-        GestoscZaludnienia gZ = new GestoscZaludnienia();
-        gestoscA = gZ.ObliczGestosc(mieszkancy, powierzchniaA);
-        gestoscB = gZ.ObliczGestosc(mieszkancy, powierzchniaB);
+        gestoscA = ObliczGestosc(mieszkancy, powierzchniaA);
+        gestoscB = ObliczGestosc(mieszkancy, powierzchniaB);
 
         Console.WriteLine("Gestosc zaludnienia pierwszego miasta wynosi: " + gestoscA + " osób/km^2");
         Console.WriteLine("Gestosc zaludnienia drugiego miasta wynosi: " + gestoscB + " osób/km^2");
     }
 }
-class GestoscZaludnienia
-{
     public double ObliczGestosc(int iloscMieszkancow, double powierzchnia)
     {
         if (powierzchnia == 0)
@@ -30,7 +27,6 @@ class GestoscZaludnienia
         }
         return iloscMieszkancow / powierzchnia;
     }
-}
 
 
 //zadanie 4.2.
@@ -210,4 +206,5 @@ internal class Program
         }
         return najmniejszy;
     }
+
 }
