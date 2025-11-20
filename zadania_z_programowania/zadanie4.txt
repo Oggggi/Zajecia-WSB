@@ -18,7 +18,6 @@ internal class Program
         Console.WriteLine("Gestosc zaludnienia pierwszego miasta wynosi: " + gestoscA + " osób/km^2");
         Console.WriteLine("Gestosc zaludnienia drugiego miasta wynosi: " + gestoscB + " osób/km^2");
     }
-}
     public double ObliczGestosc(int iloscMieszkancow, double powierzchnia)
     {
         if (powierzchnia == 0)
@@ -27,6 +26,7 @@ internal class Program
         }
         return iloscMieszkancow / powierzchnia;
     }
+}
 
 
 //zadanie 4.2.
@@ -208,3 +208,4 @@ internal class Program
     }
 
 }
+
