@@ -3,28 +3,30 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        int mieszkancy = 1000000;
-        double powierzchniaA, powierzchniaB;
-        double gestoscA, gestoscB;
+        double gestoscA, gestoscB, sredniaGestosc;
 
-        Console.WriteLine("Podaj powierzchnie pierwszego miasta w km^2: ");
-        powierzchniaA = Convert.ToDouble(Console.ReadLine());
-        Console.WriteLine("Podaj powierzchnie drugiego miasta w km^2: ");
-        powierzchniaB = Convert.ToDouble(Console.ReadLine());
-
-        gestoscA = ObliczGestosc(mieszkancy, powierzchniaA);
-        gestoscB = ObliczGestosc(mieszkancy, powierzchniaB);
-
-        Console.WriteLine("Gestosc zaludnienia pierwszego miasta wynosi: " + gestoscA + " osób/km^2");
-        Console.WriteLine("Gestosc zaludnienia drugiego miasta wynosi: " + gestoscB + " osób/km^2");
-    }
-    public double ObliczGestosc(int iloscMieszkancow, double powierzchnia)
-    {
-        if (powierzchnia == 0)
+        Console.WriteLine("Podaj gestosc pierwszego miasta (w osobach/km^2): ");
+        gestoscA = Convert.ToDouble(Console.ReadLine());
+        if (gestoscA <= 0)
         {
-            throw new ArgumentException("Powierzchnia nie może byc zerowa.");
+            Console.WriteLine("Gestosc nie moze byc ujemna lub zerem!");
+            return;
         }
-        return iloscMieszkancow / powierzchnia;
+        Console.WriteLine("Podaj gestosc drugiego miasta (w osobach/km^2): ");
+        gestoscB = Convert.ToDouble(Console.ReadLine());
+        if (gestoscB <= 0)
+        {
+            Console.WriteLine("Gestosc nie moze byc ujemna lub zerem!");
+            return;
+        }
+
+        sredniaGestosc = ObliczGestosc(gestoscA, gestoscB);
+
+        Console.WriteLine("Srednia gestosc obu miast wynosi: " + sredniaGestosc);
+    }
+    public double ObliczGestosc(int gestoscPierwsza, double gestoscDruga)
+    {
+        return (2/((1/gestoscPierwsza) + (1/gestoscDruga)));
     }
 }
 
@@ -208,4 +210,5 @@ internal class Program
     }
 
 }
+
 
