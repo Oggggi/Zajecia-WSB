@@ -1,0 +1,329 @@
+//zadanie 5.1.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        List<double> oceny = new List<double>();
+        string input;
+
+        Console.WriteLine("Wpisz oceny czastkowe (wpisz 'koniec' aby zakonczyc): ");
+
+        while (true)
+        {
+            input = Console.ReadLine();
+            if (input.ToLower() == "koniec")
+                break;
+
+            if (double.TryParse(input, out double ocena) && ocena >= 1.0 && ocena <= 6.0)
+            {
+                oceny.Add(ocena);
+            }
+            else
+            {
+                Console.WriteLine("Nieprawidlowa ocena, sprobuj ponownie");
+            }
+        }
+
+        if (oceny.Count < 3)
+        {
+            Console.WriteLine("Za malo ocen, aby obliczyc ocene semestralna");
+            return;
+        }
+
+        oceny.Sort();
+        oceny.RemoveAt(0);
+        oceny.RemoveAt(oceny.Count - 1);
+
+        double srednia = oceny.Average();
+        Console.WriteLine($"Ocena semestralna (po odrzuceniu skrajnych ocen): {srednia:F2}");
+    }
+}
+
+
+//zadanie 5.2.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        HashSet<string> imiona = new HashSet<string>();
+        string imie;
+
+        Console.WriteLine("Wpisz imiona zaczynajace sie na litere 'A'(wpisz 'koniec', aby zakonczyc): ");
+
+        while (true)
+        {
+            Console.Write("Podaj imie: ");
+            imie = Console.ReadLine();
+
+            if (imie.ToLower() == "koniec")
+            {
+                break;
+            }
+
+            if (imie.StartsWith("A", StringComparison.OrdinalIgnoreCase))
+            {
+                imiona.Add(imie);
+            }
+            else
+            {
+                Console.WriteLine("Imie nie zaczyna sie na litere'A'. Sprobuj ponownie");
+            }
+        }
+
+        Console.WriteLine($"Liczba unikatowych imion zaczynajacych sie na 'A': {imiona.Count}");
+    }
+}
+
+
+//zadanie 5.3.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        System.Collections.ArrayList items = new System.Collections.ArrayList();
+        string input;
+
+        Console.WriteLine("Wpisz nazwy owocow lub kwoty do zaplaty (wpisz 'koniec' aby zakonczyc): ");
+
+        while (true)
+        {
+            input = Console.ReadLine();
+            if (input.ToLower() == "koniec")
+                break;
+
+            items.Add(input);
+        }
+
+        decimal totalAmount = 0;
+
+        foreach (var item in items)
+        {
+            if (decimal.TryParse(item.ToString(), out decimal amount))
+            {
+                totalAmount += amount;
+            }
+        }
+
+        Console.WriteLine($"Laczna kwota wydana na owoce: {totalAmount} zlotych");
+    }
+}
+
+
+//zadanie 5.4.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Queue<string> kolejka = new Queue<string>();
+        bool running = true;
+
+        while (running)
+        {
+            Console.WriteLine("Menu:");
+            Console.WriteLine("1. DodajOsobe");
+            Console.WriteLine("2. WyswietlZawartosc");
+            Console.WriteLine("3. OpuscKolejke");
+            Console.WriteLine("4. NastepnyDoLekarzaPROSZE");
+            Console.WriteLine("5. Zakoncz program");
+            Console.Write("Wybierz opcje (1-5): ");
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    Console.Write("Podaj imie osoby do dodania: ");
+                    string imie = Console.ReadLine();
+                    kolejka.Enqueue(imie);
+                    Console.WriteLine($"{imie} zostal(a) dodany do kolejki.");
+                    break;
+
+                case "2":
+                    Console.WriteLine("Zawartosc kolejki:");
+                    foreach (var osoba in kolejka)
+                    {
+                        Console.WriteLine(osoba);
+                    }
+                    break;
+
+                case "3":
+                    Console.Write("Podaj imie osoby do usuniecia z kolejki: ");
+                    string imieDoUsuniecia = Console.ReadLine();
+                    if (kolejka.Contains(imieDoUsuniecia))
+                    {
+                        Queue<string> tempQueue = new Queue<string>();
+                        while (kolejka.Count > 0)
+                        {
+                            var current = kolejka.Dequeue();
+                            if (current != imieDoUsuniecia)
+                            {
+                                tempQueue.Enqueue(current);
+                            }
+                        }
+                        kolejka = tempQueue;
+                        Console.WriteLine($"{imieDoUsuniecia} opuscil(a) kolejke.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{imieDoUsuniecia} nie znajduje sie w kolejce.");
+                    }
+                    break;
+
+                case "4":
+                    if (kolejka.Count > 0)
+                    {
+                        var nastepny = kolejka.Dequeue();
+                        Console.WriteLine($"{nastepny} wchodzi do gabinetu lekarza.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Kolejka jest pusta.");
+                    }
+                    break;
+
+                case "5":
+                    running = false;
+                    break;
+
+                default:
+                    Console.WriteLine("Nieprawidlowy wybor. Sprobuj ponownie.");
+                    break;
+            }
+        }
+    }
+}
+
+
+//zadanie 5.5.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Stack<string> colors = new Stack<string>();
+        colors.Push("Czarny");
+        colors.Push("Pomarańczowy");
+        colors.Push("Niebieski");
+        colors.Push("Czerwony");
+        colors.Push("Zielony");
+        colors.Push("Żółty");
+        colors.Push("Fioletowy");
+        colors.Push("Brązowy");
+
+        if (colors.Count > 2)
+        {
+            string firstColor = colors.Last();
+            string lastColor = colors.First();
+
+            colors.Clear();
+            colors.Push(lastColor);
+            colors.Push(firstColor);
+        }
+        Console.WriteLine("\nPozostale kolory (pierwszy i ostatni): ");
+        foreach (var color in colors)
+        {
+            Console.WriteLine(color);
+        }
+    }
+}
+
+
+//zadanie 5.6.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        var urodziny = new Dictionary<string, string>();
+        while (true)
+        {
+            Console.Write("Podaj pseudonim znajomego (lub wpisz 'koniec' aby zakonczyc): ");
+            string pseudonim = Console.ReadLine();
+            if (pseudonim.ToLower() == "koniec")
+                break;
+
+            if (urodziny.ContainsKey(pseudonim))
+            {
+                Console.WriteLine("Ten pseudonim juz istnieje w słowniku. Sprobuj ponownie.");
+                continue;
+            }
+
+            Console.Write("Podaj date urodzin w formacie DD-MM-RRRR: ");
+            string dataUrodzin = Console.ReadLine();
+            if (!DateTime.TryParseExact(dataUrodzin, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out _))
+            {
+                Console.WriteLine("Niepoprawny format daty. Sprobuj ponownie.");
+                continue;
+            }
+
+            urodziny[pseudonim] = dataUrodzin;
+            Console.WriteLine($"Dodano: {pseudonim} - {dataUrodzin}");
+        }
+
+        Console.WriteLine("\nLista znajomych i ich dat urodzin:");
+        foreach (var entry in urodziny)
+        {
+            Console.WriteLine($"{entry.Key}: {entry.Value}");
+        }
+    }
+}
+
+
+//zadanie 5.7.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        System.Collections.Hashtable rozmiaryKoszulek = new System.Collections.Hashtable();
+        rozmiaryKoszulek.Add("S", "mała");
+        rozmiaryKoszulek.Add("M", "średnia");
+        rozmiaryKoszulek.Add("L", "duża");
+        rozmiaryKoszulek.Add("XL", "bardzo duża");
+        rozmiaryKoszulek.Add("XXL", "giga duża");
+
+        System.Console.WriteLine("Podaj kod rozmiaru koszulki (np. S, M, L, XL, XXL):");
+        string kod = System.Console.ReadLine();
+        kod = kod.ToUpper();
+
+        if (rozmiaryKoszulek.ContainsKey(kod))
+        {
+            string nazwaRozmiaru = (string)rozmiaryKoszulek[kod];
+            System.Console.WriteLine($"Rozmiar koszulki o kodzie '{kod}' to: {nazwaRozmiaru}");
+        }
+        else
+        {
+            System.Console.WriteLine("Nie znaleziono rozmiaru dla podanego kodu.");
+        }
+    }
+}
+
+
+//zadanie 5.8.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Random random = new Random();
+        LinkedList<int> miniLottoNumbers = new LinkedList<int>();
+
+        while (miniLottoNumbers.Count < 5)
+        {
+            int number = random.Next(6, 43);
+            if (!miniLottoNumbers.Contains(number))
+            {
+                miniLottoNumbers.AddLast(number);
+            }
+        }
+
+        double sum = 0;
+        foreach (int number in miniLottoNumbers)
+        {
+            sum += number;
+        }
+        double average = sum / miniLottoNumbers.Count;
+
+        Console.WriteLine("Wylosowane liczby Mini Lotto:");
+        foreach (int number in miniLottoNumbers)
+        {
+            Console.WriteLine(number);
+        }
+        Console.WriteLine($"Srednia arytmetyczna: {average}");
+    }
+}
