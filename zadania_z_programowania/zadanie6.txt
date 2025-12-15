@@ -1,0 +1,140 @@
+//zadanie 6.1.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int wiersze = 10;
+        int[][] trojkatPascala = new int[wiersze][];
+        for (int n = 0; n < wiersze; n++)
+        {
+            trojkatPascala[n] = new int[n + 1];
+            for (int k = 0; k <= n; k++)
+            {
+                trojkatPascala[n][k] = Silnia(n) / (Silnia(k) * Silnia(n - k));
+            }
+        }
+        for (int n = 0; n < wiersze; n++)
+        {
+            for (int s = 0; s < wiersze - n - 1; s++)
+            {
+                Console.Write(" ");
+            }
+            for (int k = 0; k <= n; k++)
+            {
+                Console.Write(trojkatPascala[n][k] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+    static int Silnia(int n)
+    {
+        if (n == 0 || n == 1)
+            return 1;
+        int wynik = 1;
+        for (int i = 2; i <= n; i++)
+        {
+            wynik *= i;
+        }
+        return wynik;
+    }
+}
+
+
+//zadanie 6.2.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        double a = 2.0;
+        double b = 3.0;
+        int n = 1000000;
+
+        double numericalArea = NumericalIntegration(a, b, 1000);
+        Console.WriteLine($"Pole obliczone metoda numeryczna: {numericalArea}");
+
+        double monteCarloArea = MonteCarloIntegration(a, b, n);
+        Console.WriteLine($"Pole obliczone metoda Monte Carlo: {monteCarloArea}");
+    }
+    private static double Function(double x)
+    {
+        return Math.Pow(x, 3) + 1 / x + Math.Exp(x) + Math.Cos(x);
+    }
+    private static double NumericalIntegration(double a, double b, int intervals)
+    {
+        double h = (b - a) / intervals;
+        double sum = 0.5 * (Function(a) + Function(b));
+
+        for (int i = 1; i < intervals; i++)
+        {
+            double x = a + i * h;
+            sum += Function(x);
+        }
+
+        return sum * h;
+    }
+    private static double MonteCarloIntegration(double a, double b, int n)
+    {
+        Random rand = new Random();
+        double sum = 0.0;
+
+        for (int i = 0; i < n; i++)
+        {
+            double x = a + (b - a) * rand.NextDouble();
+            sum += Function(x);
+        }
+
+        return (b - a) * (sum / n);
+    }
+
+}
+
+
+//zadanie 6.3.
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int count = 0;
+        double sum = 0;
+
+        while (true)
+        {
+            Console.WriteLine("Menu:");
+            Console.WriteLine("ENTER - Dodaj liczbe");
+            Console.WriteLine("BACKSPACE - Zacznij od poczatku");
+            Console.WriteLine("ESC - Zakoncz program");
+
+            var key = Console.ReadKey(true).Key;
+
+            if (key == ConsoleKey.Enter)
+            {
+                Console.Write("Wprowadz liczbe: ");
+                if (double.TryParse(Console.ReadLine(), out double number))
+                {
+                    count++;
+                    sum += number;
+                    double average = sum / count;
+
+                    Console.WriteLine($"Wprowadzone liczby: {count}");
+                    Console.WriteLine($"Suma: {sum}");
+                    Console.WriteLine($"Srednia: {average}");
+                }
+                else
+                {
+                    Console.WriteLine("Nieprawidlowa liczba; sprobuj ponownie");
+                }
+            }
+            else if (key == ConsoleKey.Backspace)
+            {
+                count = 0;
+                sum = 0;
+                Console.WriteLine("Rozpoczynasz od poczatku");
+            }
+            else if (key == ConsoleKey.Escape)
+            {
+                Console.WriteLine("Koniec programu");
+                break;
+            }
+        }
+    }
+}
